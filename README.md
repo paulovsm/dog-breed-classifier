@@ -6,63 +6,60 @@
 
 
 ## Project Overview
+___
+The goal of this project is to explore the machine learning approach to classifier images, in this case, dog's breed. Based on a picture of a dog, an algorithm will give an estimate of the breed of the dog. If the image of a person is given, the algorithm should reproduce the most similar dog breed. 
 
-Welcome to the Convolutional Neural Networks (CNN) project in the AI Nanodegree! In this project, you will learn how to build a pipeline that can be used within a web or mobile app to process real-world, user-supplied images.  Given an image of a dog, your algorithm will identify an estimate of the canine’s breed.  If supplied an image of a human, the code will identify the resembling dog breed.  
+See the project [proposal](https://github.com/paulovsm/dog-breed-classifier/blob/master/proposal.pdfhttps://www.google.com) for more information.
 
 ![Sample Output][image1]
 
-Along with exploring state-of-the-art CNN models for classification and localization, you will make important design decisions about the user experience for your app.  Our goal is that by completing this lab, you understand the challenges involved in piecing together a series of models designed to perform various tasks in a data processing pipeline.  Each model has its strengths and weaknesses, and engineering a real-world application often involves solving many problems without a perfect answer.  Your imperfect solution will nonetheless create a fun user experience!
+The algorithm should load an image as input and classify it as follows:
 
+* In case of a dog, predict the dog's breed;
+* In case of a human face, predict a dog's breed which that human face resembled it;
+* In case of neither dog nor human, it should provide an error
 
-## Project Instructions
+In order to demonstrate the algorithm working a web application was developed. This web application was developed with Flask and made available online.
 
-### Instructions
+## Steps to achieve project goal:
+___
+* Import Datasets (Human faces and Dogs)
+* Detect a human
+* Detect a dog
+* Create a CNN to Classify Dog Breeds
+* Create a CNN to Classify Dog Breeds (using Transfer Learning)
+* Develop a custom Algorithm
+* Test algorithm
 
-1. Clone the repository and navigate to the downloaded folder.
-	
-	```	
-		git clone https://github.com/udacity/deep-learning-v2-pytorch.git
-		cd deep-learning-v2-pytorch/project-dog-classification
-	```
-	
-__NOTE:__ if you are using the Udacity workspace, you *DO NOT* need to re-download the datasets in steps 2 and 3 - they can be found in the `/data` folder as noted within the workspace Jupyter notebook.
+## Tools and Environments used on this project
+___
+* **Jupyter notebook / AWS Sagemaker Notebook**. It was used from data exploration to final algorithm tests
+* **Jupyter notebook / Google Colab**. It was used from experimenting and testing models training leveraging the available GPU resources.
+* **PyTorch**. It was used to develop the CNN models to predict the dog's breed
+* **OpenCV**. It was used to identify the human face
+* **Matplotlib**. It was used to show images and plot graphs
+* **NumPy**, It was used to support large, multi-dimensional arrays and matrices, functions to operate on these arrays.
 
-2. Download the [dog dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip).  Unzip the folder and place it in the repo, at location `path/to/dog-project/dogImages`.  The `dogImages/` folder should contain 133 folders, each corresponding to a different dog breed.
-3. Download the [human dataset](http://vis-www.cs.umass.edu/lfw/lfw.tgz).  Unzip the folder and place it in the repo, at location `path/to/dog-project/lfw`.  If you are using a Windows machine, you are encouraged to use [7zip](http://www.7-zip.org/) to extract the folder. 
-4. Make sure you have already installed the necessary Python packages according to the README in the program repository.
-5. Open a terminal window and navigate to the project folder. Open the notebook and follow the instructions.
-	
-	```
-		jupyter notebook dog_app.ipynb
-	```
+## Devices used for testing
+___
+* AWS Sagemaker notebook
+	* Small instance for data exploration (ml.t2.medium) 
+	* Large instance with GPU to speed up the training (ml.p2.8xlarge)
+* Google Colab notebook with GPU support enable
 
-__NOTE:__ While some code has already been implemented to get you started, you will need to implement additional functionality to successfully answer all of the questions included in the notebook. __Unless requested, do not modify code that has already been included.__
+To manually run through the code, you may simply follow this URL to open the notebook on [Google Colab](https://colab.research.google.com/github/paulovsm/dog-breed-classifier/blob/master/dog_app.ipynb).
 
-__NOTE:__ In the notebook, you will need to train CNNs in PyTorch.  If your CNN is taking too long to train, feel free to pursue one of the options under the section __Accelerating the Training Process__ below.
+## Demo Application
+___
+This web application was developed with Flask. In this simple application, I provide the trained model for the prediction. The user can simply upload an image and it will be forwarded to the result page after the inference/prediction process.
 
+On the `app` folder the code of a small web project is available. The live demo was deployed on AWS EC2 and eventually will be accessible at this link: 
 
-
-## (Optionally) Accelerating the Training Process 
-
-If your code is taking too long to run, you will need to either reduce the complexity of your chosen CNN architecture or switch to running your code on a GPU.  If you'd like to use a GPU, you can spin up an instance of your own:
-
-#### Amazon Web Services
-
-You can use Amazon Web Services to launch an EC2 GPU instance. (This costs money, but enrolled students should see a coupon code in their student `resources`.)
-
-## Evaluation
-
-Your project will be reviewed by a Udacity reviewer against the CNN project rubric.  Review this rubric thoroughly and self-evaluate your project before submission.  All criteria found in the rubric must meet specifications for you to pass.
-
-
-## Project Submission
-
-Your submission should consist of the github link to your repository.  Your repository should contain:
-- The `dog_app.ipynb` file with fully functional code, all code cells executed and displaying output, and all questions answered.
-- An HTML or PDF export of the project notebook with the name `report.html` or `report.pdf`.
-
-Please do __NOT__ include any of the project data sets provided in the `dogImages/` or `lfw/` folders.
-
-### Ready to submit your project?
-
-Click on the "Submit Project" button in the classroom and follow the instructions to submit!
+## Project Improvements
+___
+* Improved face detecting algorithm, replacing OpenCV Haar Cascades with some robust Object Detection network trained to detect faces or use Dlib capabilities to do so.
+* Better control the scenario where both dog and human are present in the same picture
+* Try different alternatives for classifier layers of the transfer learning model. Try to change only the FC layer and compare the performance.
+* Expand training with more epochs and test the influence of the batch_size in the overall performance
+* Try to improve model's accuracy  by fine-tuning hyperparameters and  testing different backbone models (Inception, ResNet, VGG19)
+* Leverage SageMaker SDK and API for model training and model deployment purposes.
