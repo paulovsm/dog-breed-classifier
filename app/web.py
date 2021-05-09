@@ -4,7 +4,7 @@ from os import path
 from flask import Flask, flash, request, redirect, url_for, send_from_directory, render_template
 from werkzeug.utils import secure_filename
 from datetime import datetime
-from app.app import App
+from resources.app import App
 
 # define where the upload folder will be
 UPLOAD_FOLDER = './uploads'
