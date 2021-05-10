@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import os
 import torch
+import torch.nn as nn
+import torch.nn.functional as F
 from torch.autograd import Variable
 import torchvision.transforms as transforms
 import torchvision.models as models
@@ -44,8 +46,8 @@ class App:
         '''
         print(">>> start prediction")
         # transform the image file to tensor
-        image_normalized = self.process_image(img_path, true)
-        image_not_normalized = self.process_image(img_path, false)
+        image_normalized = self.process_image(img_path, True)
+        image_not_normalized = self.process_image(img_path, False)
         print(">>> image processed")
 
         is_dog = self.is_dog(image_normalized)
@@ -171,7 +173,7 @@ class App:
             model which classifies dog's breed
         '''
         # get base network
-        model = models.vgg16(pretrained=False)
+        model_transfer = models.vgg16(pretrained=False)
         
         for param in model_transfer.parameters():
             param.requires_grad = False
@@ -185,11 +187,11 @@ class App:
             nn.Linear(512, 133))
 
         # load trained model from disk
-        model.load_state_dict(torch.load(os.path.abspath('./resources/model/model_transfer.pt'), map_location=torch.device('cpu')))
+        model_transfer.load_state_dict(torch.load(os.path.abspath('./resources/model/model_transfer.pt'), map_location=torch.device('cpu')))
        
         # set model to evaluation
-        model.eval()
-        return model
+        model_transfer.eval()
+        return model_transfer
 
     def get_dogs_breed(self, image):
         '''

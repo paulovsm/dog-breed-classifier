@@ -1,8 +1,8 @@
 [//]: # (Image References)
 
 [image1]: ./images/sample_dog_output.png "Sample Output"
-[image2]: ./images/vgg16_model.png "VGG-16 Model Layers"
-[image3]: ./images/vgg16_model_draw.png "VGG16 Model Figure"
+[image2]: ./images/App_Screenshot_1.png "Web App Home Screen"
+[image3]: ./images/App_Screenshot_2.png "Web App Prediction Results"
 
 
 ## Project Overview
@@ -52,6 +52,10 @@ To manually run through the code, you may simply follow this URL to open the not
 ## Demo Application
 ___
 This web application was developed with Flask. In this simple application, I provide the trained model for the prediction. The user can simply upload an image and it will be forwarded to the result page after the inference/prediction process.
+
+![Sample Output][image2]
+
+![Sample Output][image3]
 
 On the `app` folder the code of a small web project is available. The live demo was deployed on AWS EC2 and eventually will be accessible at this link: 
 

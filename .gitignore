@@ -1,0 +1,3 @@
+model_transfer.pt
+mode_*.pt
+app/resources/model/*
