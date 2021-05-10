@@ -35,10 +35,12 @@ ___
 ___
 * **Jupyter notebook / AWS Sagemaker Notebook**. It was used from data exploration to final algorithm tests
 * **Jupyter notebook / Google Colab**. It was used from experimenting and testing models training leveraging the available GPU resources.
+* **Docker**. It was used to wrap the app runtime environment and support deployment task.
 * **PyTorch**. It was used to develop the CNN models to predict the dog's breed
 * **OpenCV**. It was used to identify the human face
 * **Matplotlib**. It was used to show images and plot graphs
 * **NumPy**, It was used to support large, multi-dimensional arrays and matrices, functions to operate on these arrays.
+
 
 ## Devices used for testing
 ___
@@ -49,6 +51,13 @@ ___
 
 To manually run through the code, you may simply follow this URL to open the notebook on [Google Colab](https://colab.research.google.com/github/paulovsm/dog-breed-classifier/blob/master/dog_app.ipynb).
 
+A docker image as created and published on `Docker Hub` and can be used as follow:
+
+``docker pull paulovsm/dog-classifier-cnn``
+
+``docker run -d -p 5000:5000 paulovsm/dog-classifier-cnn``
+
+
 ## Demo Application
 ___
 This web application was developed with Flask. In this simple application, I provide the trained model for the prediction. The user can simply upload an image and it will be forwarded to the result page after the inference/prediction process.
@@ -57,7 +66,8 @@ This web application was developed with Flask. In this simple application, I pro
 
 ![Sample Output][image3]
 
-On the `app` folder the code of a small web project is available. The live demo was deployed on AWS EC2 and eventually will be accessible at this link: 
+On the `app` folder the code of a small web project is available. The live demo was deployed on AWS ECS (Fargate) and eventually will be accessible at this link:
+http://dog-classifier-lb-332054199.us-east-1.elb.amazonaws.com/
 
 ## Project Improvements
 ___
