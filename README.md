@@ -71,7 +71,9 @@ http://dog-classifier-lb-332054199.us-east-1.elb.amazonaws.com/
 
 ## Project Improvements
 ___
-* Improved face detecting algorithm, replacing OpenCV Haar Cascades with some robust Object Detection network trained to detect faces or use Dlib capabilities to do so.
+Some areas of improvement in this project have been listed below:
+
+* Improve face detecting algorithm, replacing OpenCV Haar Cascades with some robust Object Detection network trained to detect faces or use Dlib capabilities to do so.
 * Better control the scenario where both dog and human are present in the same picture
 * Try different alternatives for classifier layers of the transfer learning model. Try to change only the FC layer and compare the performance.
 * Expand training with more epochs and test the influence of the batch_size in the overall performance
